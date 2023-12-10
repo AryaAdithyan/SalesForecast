@@ -3,14 +3,16 @@ import tensorflow as tf
 import numpy as np
 
 # Load the resaved model
-model_path = "resave_model.py"
-print(f"Loading model from: {model_path}")
-model = tf.keras.models.load_model(model_path)
+model_path = "resaved_sales_forecast_model"
+
+# Load the model using TensorFlow SavedModel format
+model = tf.saved_model.load(model_path)
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
-    predictions = model.predict(input_sequence)
-    return predictions.flatten().tolist()
+    # Use the 'serving_default' signature to make predictions
+    predictions = model.signatures['serving_default'](tf.constant(input_sequence, dtype=tf.float32))
+    return predictions['output'].numpy().flatten().tolist()
 
 def main():
     st.title("Sales Forecasting App")
@@ -30,6 +32,4 @@ def main():
         st.write(predictions)
 
 if __name__ == "__main__":
-    print("Starting Streamlit app...")
     main()
-
