@@ -1,14 +1,14 @@
 import streamlit as st
-import h5py
+from tensorflow.keras.models import load_model
 import numpy as np
 
-# Load the trained model using h5py
+# Load the trained model using Keras
 model_path = "sales_forecast_model_saved_model"
-model = h5py.File(model_path, 'r')
+model = load_model(model_path)
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
-    predictions = model['model'].predict(input_sequence)  # 'model' is the key used when saving the model
+    predictions = model.predict(input_sequence)
     return predictions.flatten().tolist()
 
 def main():
