@@ -48,3 +48,5 @@ checkpoint = ModelCheckpoint("sales_forecast_model.h5", save_best_only=True)
 
 # Train the model
 model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.1, callbacks=[checkpoint])
+# Save the model
+save_model(model, "sales_forecast_model.h5")
