@@ -4,6 +4,7 @@ import numpy as np
 
 # Load the resaved model
 model_path = "resaved_sales_forecast_model"
+print(f"Loading model from: {model_path}")
 model = tf.keras.models.load_model(model_path)
 
 def predict_sales(input_sequence):
@@ -29,4 +30,6 @@ def main():
         st.write(predictions)
 
 if __name__ == "__main__":
+    print("Starting Streamlit app...")
     main()
+
