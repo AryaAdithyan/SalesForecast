@@ -4,7 +4,7 @@ from tensorflow.keras.models import load_model
 import numpy as np
 
 # Load the trained model
-model = load_model("sales_forecast_model.h5")
+model = load_model("sales_forecast_model")
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
