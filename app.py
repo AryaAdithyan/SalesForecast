@@ -1,14 +1,11 @@
-# app.py
 import h5py
 import streamlit as st
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 import numpy as np
 
 # Load the trained model
 # Load your model using TensorFlow SavedModel format
 model = tf.keras.models.load_model("sales_forecast_model_saved_model")
-
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
@@ -34,3 +31,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
