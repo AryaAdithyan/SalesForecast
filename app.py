@@ -5,16 +5,9 @@ from tensorflow.keras.models import load_model
 import numpy as np
 
 # Load the trained model
-# Function to load model using h5py
-def load_model_h5py(model_path):
-    with h5py.File(model_path, 'r') as file:
-        model_json = file.attrs['model_config']
-        model = model_from_json(model_json.decode('utf-8'))
-        model.load_weights(model_path)
-    return model
+# Load your model using TensorFlow SavedModel format
+model = tf.keras.models.load_model("sales_forecast_model_saved_model")
 
-# Load your model using the function
-model = load_model_h5py("sales_forecast_model.h5")
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
