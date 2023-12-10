@@ -1,10 +1,7 @@
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 
-# Load the trained model
-model_path = "sales_forecast_model_saved_model"
-model = load_model(model_path)
+# Load the original model
+original_model = tf.keras.models.load_model("sales_forecast_model_saved_model")
 
-# Save the model again in TensorFlow SavedModel format
-saved_model_path = "sales_forecast_model_saved_model_resaved"
-model.save(saved_model_path, save_format="tf")
+# Save the model in a different format
+tf.keras.models.save_model(original_model, "resaved_sales_forecast_model")
