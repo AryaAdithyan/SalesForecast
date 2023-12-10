@@ -6,7 +6,9 @@ import numpy as np
 
 # Load the resaved model using tf.saved_model.load
 model_path = "resaved_sales_forecast_model"
-model = tf.saved_model.load(model_path)
+
+# Load the model with a specific version (use 1 for example, you can change this)
+model = tf.saved_model.load(model_path, tags=["serve"], options=tf.saved_model.LoadOptions(experimental_io_device='/job:localhost'))
 
 # Get the concrete function
 concrete_func = model.signatures[tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY]
