@@ -1,6 +1,5 @@
-import h5py
 import streamlit as st
-import tensorflow as tf
+import h5py
 import numpy as np
 
 # Load the trained model using h5py
@@ -9,7 +8,7 @@ model = h5py.File(model_path, 'r')
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
-    predictions = model['model'].predict(input_sequence)
+    predictions = model['model'].predict(input_sequence)  # 'model' is the key used when saving the model
     return predictions.flatten().tolist()
 
 def main():
