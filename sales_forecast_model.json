@@ -1,0 +1,7 @@
+# Save the model architecture to JSON
+model_json = model.to_json()
+with open("sales_forecast_model.json", "w") as json_file:
+    json_file.write(model_json)
+
+# Save the model weights
+model.save_weights("sales_forecast_model.h5")
