@@ -1,10 +1,10 @@
 import streamlit as st
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 import numpy as np
 
-# Load the trained model using Keras
-model_path = "sales_forecast_model_saved_model"
-model = load_model(model_path)
+# Load the resaved model
+model_path = "resaved_sales_forecast_model"
+model = tf.keras.models.load_model(model_path)
 
 def predict_sales(input_sequence):
     input_sequence = np.array(input_sequence).reshape(1, len(input_sequence), len(input_sequence[0]))
