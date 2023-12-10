@@ -1,7 +1,15 @@
-# Save the model architecture to JSON
-model_json = model.to_json()
-with open("sales_forecast_model.json", "w") as json_file:
-    json_file.write(model_json)
+from tensorflow.keras.models import model_from_json
 
-# Save the model weights
-model.save_weights("sales_forecast_model.h5")
+# Load the model architecture from JSON
+json_file_path = "sales_forecast_model.json"
+try:
+    with open(json_file_path, "r") as json_file:
+        loaded_model_json = json_file.read()
+        model = model_from_json(loaded_model_json)
+except FileNotFoundError:
+    st.error(f"Error: The file '{json_file_path}' was not found.")
+except Exception as e:
+    st.error(f"Error loading model architecture from JSON: {str(e)}")
+
+# Load the model weights
+model.load_weights("sales_forecast_model.h5")
