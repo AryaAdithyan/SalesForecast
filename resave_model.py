@@ -1,7 +1,6 @@
 # resave_model.py
 
 import os
-import shutil
 import tensorflow as tf
 
 # Load the original model
@@ -14,7 +13,4 @@ export_dir = "resaved_sales_forecast_model"
 os.makedirs(export_dir, exist_ok=True)
 
 # Save the model in the SavedModel format
-tf.saved_model.save(original_model, export_dir)
-
-# Optionally, copy the variables folder to the new directory
-shutil.copytree("sales_forecast_model_saved_model/variables", f"{export_dir}/variables")
+original_model.save(export_dir, save_format="tf")
