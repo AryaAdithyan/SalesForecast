@@ -7,11 +7,18 @@ import numpy as np
 # Load the resaved model using tf.saved_model.load
 model_path = "resaved_sales_forecast_model"
 
-# Load the model without specifying options
-model = tf.saved_model.load(model_path)
+try:
+    # Load the model without specifying options
+    model = tf.saved_model.load(model_path)
 
-# Get the concrete function
-concrete_func = model.signatures[tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY]
+    # Get the concrete function
+    concrete_func = model.signatures[tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY]
+
+    st.success("Model loaded successfully!")
+
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
+    raise
 
 def predict_sales(input_sequence):
     # Convert the input string to a list of lists
