@@ -1,8 +1,13 @@
 # app.py
 
+import os
 import streamlit as st
 import tensorflow as tf
 import numpy as np
+
+# Print the list of files in the directory
+st.write("Files in the directory:")
+st.write(os.listdir())
 
 # Load the resaved model using tf.saved_model.load
 model_path = "resaved_sales_forecast_model"
