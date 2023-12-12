@@ -1,9 +1,16 @@
 # resave_model.py
 
+import os
 import tensorflow as tf
 
 # Load the original model
 original_model = tf.keras.models.load_model("sales_forecast_model_saved_model")
 
-# Save the model in a different format
-tf.saved_model.save(original_model, "resaved_sales_forecast_model")
+# Specify the directory path
+export_dir = "resaved_sales_forecast_model"
+
+# Ensure the directory exists
+os.makedirs(export_dir, exist_ok=True)
+
+# Save the model in the SavedModel format
+tf.saved_model.save(original_model, export_dir)
